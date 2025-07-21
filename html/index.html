@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetireHub - Financial Wellness Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --segal-navy: #2B4C77;
+            --segal-navy-dark: #1a3354;
+            --segal-turquoise: #5BC5C7;
+            --segal-turquoise-light: #7CCFD1;
+            --segal-turquoise-dark: #4AAFB1;
+            --segal-gray: #f8f9fa;
+            --segal-dark-gray: #6C7B8A;
+            --segal-light-gray: #e9ecef;
+            --segal-text-dark: #2c3e50;
+        }
+
+        * {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--segal-text-dark);
+            font-weight: 400;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--segal-navy) !important;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.5px;
+        }
+
+
+
+        .company-tag {
+            color: var(--segal-dark-gray);
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+
+        .nav-link {
+            color: var(--segal-dark-gray) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--segal-navy) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--segal-navy) 0%, var(--segal-navy-dark) 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" patternUnits="userSpaceOnUse" width="40" height="40"><circle cx="20" cy="20" r="2" fill="rgba(91,197,199,0.1)"/></pattern></defs><rect width="1200" height="600" fill="url(%23dots)"/></svg>');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            font-size: 3.2rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero-section .lead {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--segal-turquoise) 0%, var(--segal-turquoise-dark) 100%);
+            border: none;
+            font-weight: 500;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(91, 197, 199, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--segal-turquoise-dark) 0%, var(--segal-turquoise) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(91, 197, 199, 0.4);
+        }
+
+        .btn-outline-light {
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            font-weight: 500;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--segal-navy);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-primary {
+            color: var(--segal-turquoise);
+            border: 2px solid var(--segal-turquoise);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--segal-turquoise);
+            border-color: var(--segal-turquoise);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            color: var(--segal-navy);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--segal-navy) 0%, var(--segal-navy-dark) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--segal-turquoise);
+            margin-bottom: 1.5rem;
+        }
+
+        .dashboard-sidebar {
+            background: linear-gradient(180deg, #ffffff 0%, var(--segal-gray) 100%);
+            min-height: calc(100vh - 76px);
+            padding: 2rem 1rem;
+            border-right: 1px solid var(--segal-light-gray);
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 1rem 1.25rem;
+            color: var(--segal-navy);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover {
+            background: linear-gradient(135deg, var(--segal-turquoise-light) 0%, var(--segal-turquoise) 100%);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .sidebar-link.active {
+            background: linear-gradient(135deg, var(--segal-turquoise) 0%, var(--segal-turquoise-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(91, 197, 199, 0.3);
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--segal-turquoise);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .calculator-placeholder {
+            background: linear-gradient(135deg, var(--segal-gray) 0%, #ffffff 100%);
+            border: 2px dashed var(--segal-turquoise);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            color: var(--segal-dark-gray);
+        }
+
+        .admin-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .role-badge {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .role-admin { 
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white; 
+        }
+        .role-organization { 
+            background: linear-gradient(135deg, var(--segal-turquoise) 0%, var(--segal-turquoise-dark) 100%);
+            color: white; 
+        }
+        .role-employee { 
+            background: linear-gradient(135deg, #198754 0%, #157347 100%);
+            color: white; 
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        .access-level-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-radius: 12px;
+            background: white;
+            border: 2px solid var(--segal-light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .access-level-card:hover {
+            border-color: var(--segal-turquoise);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(91, 197, 199, 0.2);
+        }
+
+        .segal-branding {
+            background: linear-gradient(135deg, #ffffff 0%, var(--segal-gray) 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--segal-turquoise);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .company-info {
+            background: linear-gradient(135deg, var(--segal-navy) 0%, var(--segal-navy-dark) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            border: 1px solid var(--segal-turquoise);
+            color: var(--segal-navy);
+            border-radius: 8px;
+        }
+
+        .text-primary {
+            color: var(--segal-navy) !important;
+        }
+
+        .welcome-image-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 4rem 0;
+        }
+
+        .welcome-image {
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .login-card {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .newsletter-signup {
+            background: linear-gradient(135deg, var(--segal-gray) 0%, #ffffff 100%);
+            padding: 4rem 0;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            padding: 0.875rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--segal-turquoise);
+            box-shadow: 0 0 0 0.25rem rgba(91, 197, 199, 0.15);
+        }
+
+        /* Enhanced typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .lead {
+            font-weight: 400;
+            color: var(--segal-dark-gray);
+        }
+
+        /* Contact Us button styling to match Segal design */
+        .btn-contact {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            border: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-contact:hover {
+            background: linear-gradient(135deg, #f7931e 0%, #ff6b35 100%);
+            transform: translateY(-2px);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showView('home')">
+                <img src="segal-logo-2020.svg" alt="Segal Logo" style="height: 1.5rem; width: auto; margin-right: 12px;">
+                <span>RetireHub</span>
+                <span class="company-tag" id="companyTag"></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item" id="dashboardNav" style="display: none;">
+                        <a class="nav-link" href="#" onclick="showView('dashboard')">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item" id="adminNav" style="display: none;">
+                        <a class="nav-link" href="#" onclick="showView('admin')">
+                            <i class="fas fa-cog me-1"></i>Admin Panel
+                        </a>
+                    </li>
+                    <li class="nav-item" id="orgNav" style="display: none;">
+                        <a class="nav-link" href="#" onclick="showView('orgManage')">
+                            <i class="fas fa-building me-1"></i>Manage Content
+                        </a>
+                    </li>
+                    <li class="nav-item" id="userNav" style="display: none;">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-2"></i>
+                            <span id="currentUsername"></span>
+                            <span class="role-badge ms-2" id="currentRole"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="logout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" id="loginNav">
+                        <a class="nav-link btn btn-primary text-white px-4" href="#" onclick="showView('login')">
+                            Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home View -->
+    <div id="homeView" class="view active">
+        <div class="hero-section">
+            <div class="container">
+                <div class="hero-content text-center">
+                    <h1 class="display-4 mb-4">Benefits and HR Consulting<br>That Improves Lives</h1>
+                    <p class="lead mb-4" style="color: rgba(255, 255, 255, 0.9);">Our solutions bring millions of people peace of mind through personalized retirement planning.<br>
+                    <small style="color: rgba(255, 255, 255, 0.8);">Find out how our financial wellness platform can help your organization.</small></p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="#" onclick="showView('login')" class="btn btn-contact btn-lg">
+                            <i class="fas fa-envelope me-2"></i>Contact Us
+                        </a>
+                        <a href="#" onclick="showView('login')" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Image Section -->
+        <div class="welcome-image-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <img id="welcomeCoupleImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23f0f8ff' width='600' height='400'/%3E%3Ctext x='50%25' y='40%25' text-anchor='middle' fill='%235BC5C7' font-size='24' font-family='Inter'%3EHappy Couple%3C/text%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' fill='%232B4C77' font-size='16' font-family='Inter'%3EPlanning Their Financial Future%3C/text%3E%3Ccircle cx='200' cy='200' r='80' fill='%235BC5C7' opacity='0.3'/%3E%3Ccircle cx='400' cy='200' r='60' fill='%232B4C77' opacity='0.3'/%3E%3C/svg%3E" 
+                             alt="Happy couple planning their financial future" class="img-fluid welcome-image">
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="section-title">Retirement planning customized for you</h2>
+                        <p class="lead mb-4">Every organization comes to us with a unique set of challenges and opportunities. What do we provide? Personalized advice, not one-size-fits-all products.</p>
+                        <p class="mb-4">And we know industries. Our experience spans many sectors, with deep expertise in organizations large and small, public and private.</p>
+                        <a href="#" class="btn btn-primary btn-lg">
+                            See Who We Help <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <!-- Segal Branding Section -->
+            <div class="segal-branding">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h5 class="mb-3 d-flex align-items-center">
+                            <img src="segal-logo-2020.svg" alt="Segal Logo" style="height: 1.25rem; width: auto; margin-right: 12px;">
+                            <span>Powered by Segal</span>
+                        </h5>
+                        <p class="mb-0 lead">Delivering trusted advice that improves lives since 1939. RetireHub brings our expertise directly to your organization's employees with personalized, accessible financial wellness tools.</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <small class="text-muted fw-medium">A Segal Group Company Product</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stay informed section -->
+            <div class="text-center mb-5">
+                <h2 class="section-title">Stay informed. Get the latest insight.</h2>
+                <p class="lead">We provide comprehensive tools and resources to help you make informed financial decisions throughout your career, backed by Segal's industry-leading expertise.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-graduation-cap feature-icon"></i>
+                            <h5 class="card-title">Financial Education</h5>
+                            <p class="card-text">Access comprehensive learning modules covering financial basics, retirement planning, and investment fundamentals, curated by Segal's expert consultants.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-calculator feature-icon"></i>
+                            <h5 class="card-title">Planning Tools</h5>
+                            <p class="card-text">Use our financial calculators and projection tools to plan your retirement and understand your savings potential with Segal's proven methodologies.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-newspaper feature-icon"></i>
+                            <h5 class="card-title">Stay Updated</h5>
+                            <p class="card-text">Get the latest updates on policy changes, market trends, and financial best practices through our newsletter, informed by Segal's industry insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center mb-4">Access Levels for Your Organization</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="access-level-card">
+                                        <i class="fas fa-user text-success" style="font-size: 2rem;"></i>
+                                        <h6 class="mt-3">Employee Access</h6>
+                                        <p class="small text-muted">Access all educational resources and planning tools</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="access-level-card">
+                                        <i class="fas fa-building" style="font-size: 2rem; color: var(--segal-turquoise);"></i>
+                                        <h6 class="mt-3">Organization Access</h6>
+                                        <p class="small text-muted">Customize content and resources for your organization</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="access-level-card">
+                                        <i class="fas fa-crown text-danger" style="font-size: 2rem;"></i>
+                                        <h6 class="mt-3">Segal Admin Access</h6>
+                                        <p class="small text-muted">Full platform management and content control</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="newsletter-signup">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto text-center">
+                        <h2 class="section-title mb-4">Stay informed. Get the latest insight.</h2>
+                        <p class="lead mb-4">Don't miss out. Join 16,000 others who already get the latest insights from Segal on retirement planning, policy changes, and financial wellness strategies.</p>
+                        <div class="row g-3 justify-content-center">
+                            <div class="col-md-3 col-sm-6">
+                                <input type="text" class="form-control" placeholder="First Name">
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <input type="text" class="form-control" placeholder="Last Name">
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <input type="email" class="form-control" placeholder="Email Address">
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <button class="btn btn-primary w-100">
+                                    Sign Up <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-shield-alt me-1"></i>
+                                We respect your privacy. Unsubscribe at any time.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login View -->
+    <div id="loginView" class="view">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card login-card">
+                        <div class="card-header text-center text-white" style="background: linear-gradient(135deg, var(--segal-navy) 0%, var(--segal-navy-dark) 100%);">
+                            <h4 class="mb-0 d-flex align-items-center justify-content-center">
+                                <img src="segal-logo-2020.svg" alt="Segal Logo" style="height: 1.5rem; width: auto; margin-right: 12px; filter: brightness(0) invert(1);">
+                                <span>RetireHub Login</span>
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form onsubmit="handleLogin(event)">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <small class="text-muted fw-bold">Johnson & Associates Employee:</small><br>
+                                        <small><strong>Username:</strong> employee</small><br>
+                                        <small><strong>Password:</strong> emp123</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="text-muted fw-bold">Segal Group Employee:</small><br>
+                                        <small><strong>Username:</strong> segal_employee</small><br>
+                                        <small><strong>Password:</strong> segalemp123</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center text-muted">
+                            <small>Powered by The Segal Group, Inc.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboardView" class="view">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 dashboard-sidebar">
+                    <h5 class="mb-4">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </h5>
+                    <a href="#" class="sidebar-link active" onclick="showDashboardSection('learning')">
+                        <i class="fas fa-graduation-cap me-2"></i>Financial Learning
+                    </a>
+                    <a href="#" class="sidebar-link" onclick="showDashboardSection('resources')">
+                        <i class="fas fa-link me-2"></i>Credible Resources
+                    </a>
+                    <a href="#" class="sidebar-link" onclick="showDashboardSection('calculator')">
+                        <i class="fas fa-calculator me-2"></i>Financial Calculator
+                    </a>
+                    <a href="#" class="sidebar-link" onclick="showDashboardSection('newsletter')">
+                        <i class="fas fa-newspaper me-2"></i>Policy Updates
+                    </a>
+                    <a href="#" class="sidebar-link" onclick="openRetireChat()">
+                        <i class="fas fa-comments me-2"></i>RetireChat
+                    </a>
+                    
+                    <hr class="my-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Note:</strong> Seek additional resources within your company for organization-specific financial planning guidance.
+                    </div>
+                </div>
+                
+                <div class="col-md-9">
+                    <div class="p-4">
+                        <!-- Company Info Section -->
+                        <div class="company-info" id="companyInfo">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="segal-logo-2020.svg" alt="Segal Logo" style="height: 1.25rem; width: auto; margin-right: 16px; filter: brightness(0) invert(1);">
+                                    <div>
+                                        <h5 class="mb-1">RetireHub | <span id="dashboardCompany"></span></h5>
+                                        <p class="mb-0 opacity-90">Welcome, <strong id="dashboardUsername"></strong>!</p>
+                                    </div>
+                                </div>
+                                <span class="role-badge" id="dashboardRole"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Financial Learning Section -->
+                        <section id="learningSection" class="dashboard-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-graduation-cap me-2"></i>Financial Learning 101 Modules
+                            </h3>
+                            <div class="row" id="financialModules">
+                                <!-- Content will be loaded here -->
+                            </div>
+                        </section>
+
+                        <!-- Calculator Section -->
+                        <section id="calculatorSection" class="dashboard-section" style="display: none;">
+                            <h3 class="section-title">
+                                <i class="fas fa-calculator me-2"></i>Financial Wage and Projection Calculator
+                            </h3>
+                            <div class="calculator-placeholder">
+                                <i class="fas fa-calculator" style="font-size: 4rem; margin-bottom: 1rem; color: var(--segal-turquoise);"></i>
+                                <h4>Segal Financial Calculator</h4>
+                                <p>Calculate your retirement savings projections and financial goals using Segal's proven methodologies</p>
+                                <button class="btn btn-primary btn-lg" onclick="openCalculator()">
+                                    <i class="fas fa-external-link-alt me-2"></i>Open Calculator
+                                </button>
+                                <div class="mt-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        This calculator was developed by Segal's financial planning experts
+                                    </small>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Resources Section -->
+                        <section id="resourcesSection" class="dashboard-section" style="display: none;">
+                            <h3 class="section-title">
+                                <i class="fas fa-link me-2"></i>Suggested Credible Websites
+                            </h3>
+                            <div class="row" id="credibleWebsites">
+                                <!-- Content will be loaded here -->
+                            </div>
+                        </section>
+
+                        <!-- Newsletter Section -->
+                        <section id="newsletterSection" class="dashboard-section" style="display: none;">
+                            <h3 class="section-title">
+                                <i class="fas fa-newspaper me-2"></i>Newsletter on Current Policy Changes
+                            </h3>
+                            <div class="row" id="newsletterContent">
+                                <!-- Content will be loaded here -->
+                            </div>
+                        </section>
+
+                        <!-- RetireChat Section -->
+                        <section id="retirechatSection" class="dashboard-section" style="display: none;">
+                            <h3 class="section-title">
+                                <i class="fas fa-comments me-2"></i>Segal RetireChat Assistant
+                            </h3>
+                            <div class="content-card text-center">
+                                <i class="fas fa-robot" style="font-size: 3rem; color: var(--segal-turquoise); margin-bottom: 1rem;"></i>
+                                <h5>AI-Powered Retirement Planning Assistant</h5>
+                                <p class="text-muted">Get personalized answers to your retirement planning questions, powered by Segal's expertise</p>
+                                <button class="btn btn-primary" onclick="openRetireChat()">
+                                    <i class="fas fa-comments me-2"></i>Start Chat
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin View -->
+    <div id="adminView" class="view">
+        <div class="container mt-4">
+            <h2 class="section-title d-flex align-items-center">
+                <img src="segal-logo-2020.svg" alt="Segal Logo" style="height: 2.2rem; width: auto; margin-right: 16px;">
+                <span>Admin Panel</span>
+            </h2>
+            
+            <div class="admin-panel">
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fas fa-users feature-icon"></i>
+                                <h5>Total Content Items</h5>
+                                <h3 class="text-primary" id="totalContentCount">12</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fas fa-building feature-icon"></i>
+                                <h5>Client Organizations</h5>
+                                <h3 style="color: var(--segal-turquoise);">Multiple</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fas fa-chart-line feature-icon"></i>
+                                <h5>Platform Status</h5>
+                                <h3 class="text-info">Active</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platform Settings -->
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: var(--segal-turquoise); color: white;">
+                        <h5><i class="fas fa-cog me-2"></i>Platform Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Welcome Section Couple Image</h6>
+                                <div class="mb-2">
+                                    <img id="adminCouplePreview" src="" alt="Current couple image" style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px;">
+                                </div>
+                                <form onsubmit="updateCoupleImage(event)">
+                                    <div class="input-group mb-2">
+                                        <input type="url" class="form-control" id="coupleImageUrl" placeholder="Enter image URL" required>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                                <small class="text-muted">Enter a direct image URL (jpg, png, etc.)</small>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Financial Calculator Link</h6>
+                                <form onsubmit="updateCalculatorLink(event)">
+                                    <div class="input-group mb-2">
+                                        <input type="url" class="form-control" id="calculatorUrl" placeholder="Enter calculator URL" required>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                                <small class="text-muted">Current: <span id="currentCalculatorUrl"></span></small>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>RetireChat AI Bot Link</h6>
+                                <form onsubmit="updateRetireChatLink(event)">
+                                    <div class="input-group mb-2">
+                                        <input type="url" class="form-control" id="retireChatUrl" placeholder="Enter AI bot URL" required>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                                <small class="text-muted">Current: <span id="currentRetireChatUrl"></span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add New Content -->
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: var(--segal-gray);">
+                        <h5><i class="fas fa-plus me-2"></i>Add New Content</h5>
+                    </div>
+                    <div class="card-body">
+                        <form onsubmit="addContent(event)">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <select class="form-select" name="section" required>
+                                        <option value="">Select Section</option>
+                                        <option value="financial_modules">Financial Modules</option>
+                                        <option value="credible_websites">Credible Websites</option>
+                                        <option value="newsletter">Newsletter</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="title" placeholder="Title" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="description" placeholder="Description">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="url" class="form-control" name="url" placeholder="URL" required>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Content Management -->
+                <div class="card">
+                    <div class="card-header" style="background-color: var(--segal-gray);">
+                        <h5><i class="fas fa-list me-2"></i>Manage All Content</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="adminContentList">
+                            <!-- Content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organization Management View -->
+    <div id="orgManageView" class="view">
+        <div class="container mt-4">
+            <h2 class="section-title">
+                <i class="fas fa-building me-2"></i>Organization Content Management
+            </h2>
+            <p class="text-muted">Manage YouTube links for learning modules, company newsletter resources, and company financial calculator link for your organization.</p>
+            
+            <div class="admin-panel">
+                <!-- Add New Content -->
+                <div class="card mb-4">
+                    <div class="card-header" style="background-color: var(--segal-gray);">
+                        <h5><i class="fas fa-plus me-2"></i>Add Organization Content</h5>
+                    </div>
+                    <div class="card-body">
+                        <form onsubmit="addOrgContent(event)">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <select class="form-select" name="section" required>
+                                        <option value="">Select Section</option>
+                                        <option value="financial_modules">Financial Modules (YouTube)</option>
+                                        <option value="credible_websites">Company Resources</option>
+                                        <option value="newsletter">Company Newsletter</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="title" placeholder="Title" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="description" placeholder="Description">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="url" class="form-control" name="url" placeholder="URL" required>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Current Content -->
+                <div class="card">
+                    <div class="card-header" style="background-color: var(--segal-gray);">
+                        <h5><i class="fas fa-list me-2"></i>Current Organization Content</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="orgContentList">
+                            <!-- Content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="d-flex align-items-center mb-3">
+                        <img src="segal-logo-2020.svg" alt="Segal Logo" style="height: 1.25rem; width: auto; margin-right: 12px; filter: brightness(0) invert(1);">
+                        <span>RetireHub</span>
+                    </h5>
+                    <p class="mb-0">Delivering trusted advice that improves lives. Powered by The Segal Group's 80+ years of expertise in benefits consulting and financial wellness.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Resources</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Financial Education</a></li>
+                        <li><a href="#" class="text-light">Retirement Planning</a></li>
+                        <li><a href="#" class="text-light">Investment Basics</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Help Center</a></li>
+                        <li><a href="#" class="text-light">Contact Segal</a></li>
+                        <li><a href="#" class="text-light">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p>&copy; 2025 by The Segal Group, Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Demo users with companies
+        const users = {
+            'admin': { password: 'admin123', role: 'admin', organization: 'Segal Global', company: 'Segal Administration' },
+            'org_user': { password: 'org123', role: 'organization', organization: 'Johnson & Associates Law Firm', company: 'Johnson & Associates Law Firm' },
+            'employee': { password: 'emp123', role: 'employee', organization: 'Johnson & Associates Law Firm', company: 'Johnson & Associates Law Firm' },
+            'segal_org': { password: 'segal123', role: 'organization', organization: 'The Segal Group', company: 'The Segal Group' },
+            'segal_employee': { password: 'segalemp123', role: 'employee', organization: 'The Segal Group', company: 'The Segal Group' }
+        };
+
+        // Sample content data
+        let contentData = {
+            financial_modules: [
+                { id: 1, title: 'Financial Basics 101', description: 'Learn the fundamentals of personal finance with Segal experts', url: 'https://www.youtube.com/watch?v=example1', organization: 'Global' },
+                { id: 2, title: 'Retirement Planning Essentials', description: 'Understanding retirement planning with Segal methodologies', url: 'https://www.youtube.com/watch?v=example2', organization: 'Global' },
+                { id: 3, title: 'Investment Fundamentals', description: 'Learn about different investment options with Segal guidance', url: 'https://www.youtube.com/watch?v=example3', organization: 'Global' }
+            ],
+            credible_websites: [
+                { id: 4, title: 'SEC Investor.gov', description: 'Official SEC investor education resources', url: 'https://www.investor.gov/', organization: 'Global' },
+                { id: 5, title: 'FINRA Investor Education', description: 'Financial industry regulatory authority resources', url: 'https://www.finra.org/investors', organization: 'Global' },
+                { id: 6, title: 'IRS Retirement Plans', description: 'Official IRS information on retirement plans', url: 'https://www.irs.gov/retirement-plans', organization: 'Global' }
+            ],
+            newsletter: [
+                { id: 7, title: 'SECURE Act 2.0 Updates', description: 'Latest changes in retirement legislation - Segal analysis', url: '#', organization: 'Global' },
+                { id: 8, title: 'Market Updates Q3 2025', description: 'Quarterly market analysis and impacts from Segal experts', url: '#', organization: 'Global' }
+            ]
+        };
+
+        // Platform settings that admins can modify
+        let platformSettings = {
+            coupleImageUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23f0f8ff' width='600' height='400'/%3E%3Ctext x='50%25' y='40%25' text-anchor='middle' fill='%235BC5C7' font-size='24' font-family='Inter'%3EHappy Couple%3C/text%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' fill='%232B4C77' font-size='16' font-family='Inter'%3EPlanning Their Financial Future%3C/text%3E%3Ccircle cx='200' cy='200' r='80' fill='%235BC5C7' opacity='0.3'/%3E%3Ccircle cx='400' cy='200' r='60' fill='%232B4C77' opacity='0.3'/%3E%3C/svg%3E",
+            calculatorUrl: "#calculator-placeholder",
+            retireChatUrl: "https://retirechat-b54iqv3moq-uc.a.run.app/"
+        };
+
+        let currentUser = null;
+        let nextId = 9;
+
+        // Load content from storage
+        function loadContent() {
+            const saved = JSON.parse(localStorage.getItem('segal_retirehub_content') || 'null');
+            if (saved) {
+                contentData = saved;
+                nextId = Math.max(...Object.values(contentData).flat().map(item => item.id)) + 1;
+            }
+            
+            // Load platform settings
+            const savedSettings = JSON.parse(localStorage.getItem('segal_retirehub_settings') || 'null');
+            if (savedSettings) {
+                platformSettings = savedSettings;
+            }
+            
+            // Update couple image on homepage
+            updateCoupleImageDisplay();
+        }
+
+        // Save content to storage
+        function saveContent() {
+            localStorage.setItem('segal_retirehub_content', JSON.stringify(contentData));
+        }
+
+        // Save platform settings
+        function savePlatformSettings() {
+            localStorage.setItem('segal_retirehub_settings', JSON.stringify(platformSettings));
+        }
+
+        // Update couple image display
+        function updateCoupleImageDisplay() {
+            const welcomeImg = document.getElementById('welcomeCoupleImage');
+            const adminPreview = document.getElementById('adminCouplePreview');
+            
+            if (welcomeImg) {
+                welcomeImg.src = platformSettings.coupleImageUrl;
+            }
+            if (adminPreview) {
+                adminPreview.src = platformSettings.coupleImageUrl;
+            }
+        }
+
+        // Initialize the app
+        function init() {
+            loadContent();
+            showView('home');
+        }
+
+        // Handle login
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (users[username] && users[username].password === password) {
+                currentUser = {
+                    username: username,
+                    role: users[username].role,
+                    organization: users[username].organization,
+                    company: users[username].company
+                };
+                
+                updateNavigation();
+                showView('dashboard');
+                loadDashboardContent();
+                showAlert('Login successful! Welcome to RetireHub.', 'success');
+            } else {
+                showAlert('Invalid username or password', 'danger');
+            }
+        }
+
+        // Update navigation based on user role
+        function updateNavigation() {
+            if (currentUser) {
+                document.getElementById('loginNav').style.display = 'none';
+                document.getElementById('dashboardNav').style.display = 'block';
+                document.getElementById('userNav').style.display = 'block';
+                document.getElementById('currentUsername').textContent = currentUser.username;
+                document.getElementById('currentRole').textContent = currentUser.role === 'admin' ? 'Segal Admin' : currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+                document.getElementById('currentRole').className = `role-badge role-${currentUser.role}`;
+
+                // Update company tag in navbar
+                const companyTag = document.getElementById('companyTag');
+                if (currentUser.role !== 'admin') {
+                    companyTag.textContent = ` | ${currentUser.company}`;
+                } else {
+                    companyTag.textContent = '';
+                }
+
+                if (currentUser.role === 'admin') {
+                    document.getElementById('adminNav').style.display = 'block';
+                    document.getElementById('orgNav').style.display = 'block';
+                } else if (currentUser.role === 'organization') {
+                    document.getElementById('orgNav').style.display = 'block';
+                }
+            } else {
+                document.getElementById('loginNav').style.display = 'block';
+                document.getElementById('dashboardNav').style.display = 'none';
+                document.getElementById('userNav').style.display = 'none';
+                document.getElementById('adminNav').style.display = 'none';
+                document.getElementById('orgNav').style.display = 'none';
+                document.getElementById('companyTag').textContent = '';
+            }
+        }
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            updateNavigation();
+            showView('home');
+            showAlert('Logged out successfully from RetireHub!', 'info');
+        }
+
+        // Show different views
+        function showView(viewName) {
+            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+            document.getElementById(viewName + 'View').classList.add('active');
+
+            if (viewName === 'home') {
+                updateCoupleImageDisplay();
+            } else if (viewName === 'dashboard' && currentUser) {
+                loadDashboardContent();
+            } else if (viewName === 'admin' && currentUser && currentUser.role === 'admin') {
+                loadAdminContent();
+            } else if (viewName === 'orgManage' && currentUser && (currentUser.role === 'admin' || currentUser.role === 'organization')) {
+                loadOrgContent();
+            }
+        }
+
+        // Show dashboard sections
+        function showDashboardSection(section) {
+            document.querySelectorAll('.dashboard-section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
+            
+            if (section === 'learning') {
+                document.getElementById('learningSection').style.display = 'block';
+            } else if (section === 'resources') {
+                document.getElementById('resourcesSection').style.display = 'block';
+            } else if (section === 'calculator') {
+                document.getElementById('calculatorSection').style.display = 'block';
+            } else if (section === 'newsletter') {
+                document.getElementById('newsletterSection').style.display = 'block';
+            }
+            
+            event.target.classList.add('active');
+        }
+
+        // Load dashboard content
+        function loadDashboardContent() {
+            if (!currentUser) return;
+
+            document.getElementById('dashboardUsername').textContent = currentUser.username;
+            document.getElementById('dashboardCompany').textContent = currentUser.company;
+            document.getElementById('dashboardRole').textContent = currentUser.role === 'admin' ? 'Segal Admin' : currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+            document.getElementById('dashboardRole').className = `role-badge role-${currentUser.role}`;
+
+            loadFinancialModules();
+            loadCredibleWebsites();
+            loadNewsletterContent();
+        }
+
+        // Load financial modules
+        function loadFinancialModules() {
+            const container = document.getElementById('financialModules');
+            container.innerHTML = '';
+
+            const modules = getContentForUser('financial_modules');
+            modules.forEach(module => {
+                container.innerHTML += `
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="content-card">
+                            <h5>${module.title}</h5>
+                            <p class="text-muted">${module.description}</p>
+                            <a href="${module.url}" target="_blank" class="btn btn-primary btn-sm">
+                                <i class="fas fa-play me-1"></i>Watch Module
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Load credible websites
+        function loadCredibleWebsites() {
+            const container = document.getElementById('credibleWebsites');
+            container.innerHTML = '';
+
+            const websites = getContentForUser('credible_websites');
+            websites.forEach(website => {
+                container.innerHTML += `
+                    <div class="col-md-6 mb-3">
+                        <div class="content-card">
+                            <h5>${website.title}</h5>
+                            <p class="text-muted">${website.description}</p>
+                            <a href="${website.url}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-external-link-alt me-1"></i>Visit Website
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Load newsletter content
+        function loadNewsletterContent() {
+            const container = document.getElementById('newsletterContent');
+            container.innerHTML = '';
+
+            const articles = getContentForUser('newsletter');
+            articles.forEach(article => {
+                container.innerHTML += `
+                    <div class="col-md-6 mb-3">
+                        <div class="content-card">
+                            <h5>${article.title}</h5>
+                            <p class="text-muted">${article.description}</p>
+                            <a href="${article.url}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-newspaper me-1"></i>Read Article
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Get content based on user role and organization
+        function getContentForUser(section) {
+            if (!currentUser) return [];
+            
+            if (currentUser.role === 'admin') {
+                return contentData[section] || [];
+            } else {
+                return (contentData[section] || []).filter(item => 
+                    item.organization === 'Global' || item.organization === currentUser.organization
+                );
+            }
+        }
+
+        // Load admin content
+        function loadAdminContent() {
+            const container = document.getElementById('adminContentList');
+            container.innerHTML = '';
+
+            let html = '<div class="table-responsive"><table class="table table-striped"><thead><tr><th>ID</th><th>Section</th><th>Title</th><th>Description</th><th>URL</th><th>Organization</th><th>Actions</th></tr></thead><tbody>';
+
+            Object.keys(contentData).forEach(section => {
+                contentData[section].forEach(item => {
+                    html += `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td><span class="badge bg-secondary">${section}</span></td>
+                            <td>${item.title}</td>
+                            <td>${item.description.substring(0, 50)}${item.description.length > 50 ? '...' : ''}</td>
+                            <td><a href="${item.url}" target="_blank" class="btn btn-sm btn-outline-primary">View</a></td>
+                            <td><span class="badge" style="background-color: var(--segal-turquoise);">${item.organization}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" onclick="editContent(${item.id}, '${section}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteContent(${item.id}, '${section}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            });
+
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+
+            document.getElementById('totalContentCount').textContent = Object.values(contentData).flat().length;
+            
+            // Load platform settings into admin form
+            loadPlatformSettingsForm();
+        }
+
+        // Load platform settings into admin form
+        function loadPlatformSettingsForm() {
+            const coupleInput = document.getElementById('coupleImageUrl');
+            coupleInput.value = platformSettings.coupleImageUrl;
+            
+            // Add real-time preview update
+            coupleInput.addEventListener('input', function() {
+                const preview = document.getElementById('adminCouplePreview');
+                if (this.value) {
+                    preview.src = this.value;
+                    preview.onerror = function() {
+                        this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f8f9fa' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%236c757d' font-size='12' font-family='Arial'%3EInvalid Image%3C/text%3E%3C/svg%3E";
+                    };
+                }
+            });
+            
+            document.getElementById('calculatorUrl').value = platformSettings.calculatorUrl;
+            document.getElementById('retireChatUrl').value = platformSettings.retireChatUrl;
+            
+            document.getElementById('currentCalculatorUrl').textContent = platformSettings.calculatorUrl;
+            document.getElementById('currentRetireChatUrl').textContent = platformSettings.retireChatUrl;
+            
+            updateCoupleImageDisplay();
+        }
+
+        // Update couple image
+        function updateCoupleImage(event) {
+            event.preventDefault();
+            const newUrl = document.getElementById('coupleImageUrl').value;
+            platformSettings.coupleImageUrl = newUrl;
+            savePlatformSettings();
+            updateCoupleImageDisplay();
+            showAlert('Couple image updated successfully!', 'success');
+        }
+
+        // Update calculator link
+        function updateCalculatorLink(event) {
+            event.preventDefault();
+            const newUrl = document.getElementById('calculatorUrl').value;
+            platformSettings.calculatorUrl = newUrl;
+            savePlatformSettings();
+            document.getElementById('currentCalculatorUrl').textContent = newUrl;
+            showAlert('Calculator link updated successfully!', 'success');
+        }
+
+        // Update RetireChat link
+        function updateRetireChatLink(event) {
+            event.preventDefault();
+            const newUrl = document.getElementById('retireChatUrl').value;
+            platformSettings.retireChatUrl = newUrl;
+            savePlatformSettings();
+            document.getElementById('currentRetireChatUrl').textContent = newUrl;
+            showAlert('RetireChat link updated successfully!', 'success');
+        }
+
+        // Open calculator with dynamic link
+        function openCalculator() {
+            if (platformSettings.calculatorUrl === '#calculator-placeholder') {
+                showAlert('Calculator link not configured yet. Please contact your administrator.', 'warning');
+            } else {
+                window.open(platformSettings.calculatorUrl, '_blank');
+            }
+        }
+
+        // Open RetireChat with dynamic link
+        function openRetireChat() {
+            window.open(platformSettings.retireChatUrl, '_blank');
+        }
+
+        // Load organization content
+        function loadOrgContent() {
+            const container = document.getElementById('orgContentList');
+            container.innerHTML = '';
+
+            const sections = ['financial_modules', 'credible_websites', 'newsletter'];
+            const sectionTitles = {
+                'financial_modules': 'Financial Learning Modules',
+                'credible_websites': 'Company Resources',
+                'newsletter': 'Company Newsletter'
+            };
+            const sectionIcons = {
+                'financial_modules': 'fas fa-graduation-cap',
+                'credible_websites': 'fas fa-link',
+                'newsletter': 'fas fa-newspaper'
+            };
+
+            let html = '<div class="row">';
+
+            sections.forEach(section => {
+                html += `<div class="col-md-4 mb-4">
+                    <h6 class="text-primary"><i class="${sectionIcons[section]} me-1"></i>${sectionTitles[section]}</h6>`;
+
+                const items = getContentForUser(section).filter(item => 
+                    currentUser.role === 'admin' || item.organization !== 'Global'
+                );
+
+                items.forEach(item => {
+                    html += `
+                        <div class="card mb-2">
+                            <div class="card-body p-2">
+                                <h6 class="card-title small">${item.title}</h6>
+                                <p class="card-text small text-muted">${item.description}</p>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="${item.url}" target="_blank" class="btn btn-outline-primary btn-sm">View</a>
+                                    <button class="btn btn-outline-warning btn-sm" onclick="editContent(${item.id}, '${section}')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Add content
+        function addContent(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const section = formData.get('section');
+            const title = formData.get('title');
+            const description = formData.get('description');
+            const url = formData.get('url');
+
+            const newItem = {
+                id: nextId++,
+                title: title,
+                description: description,
+                url: url,
+                organization: 'Global'
+            };
+
+            if (!contentData[section]) {
+                contentData[section] = [];
+            }
+            contentData[section].push(newItem);
+            saveContent();
+            loadAdminContent();
+            event.target.reset();
+            showAlert('Content added successfully to RetireHub!', 'success');
+        }
+
+        // Add organization content
+        function addOrgContent(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const section = formData.get('section');
+            const title = formData.get('title');
+            const description = formData.get('description');
+            const url = formData.get('url');
+
+            const newItem = {
+                id: nextId++,
+                title: title,
+                description: description,
+                url: url,
+                organization: currentUser.organization
+            };
+
+            if (!contentData[section]) {
+                contentData[section] = [];
+            }
+            contentData[section].push(newItem);
+            saveContent();
+            loadOrgContent();
+            event.target.reset();
+            showAlert('Organization content added successfully!', 'success');
+        }
+
+        // Edit content
+        function editContent(id, section) {
+            const item = contentData[section].find(item => item.id === id);
+            if (!item) return;
+
+            const newTitle = prompt('Edit title:', item.title);
+            const newDescription = prompt('Edit description:', item.description);
+            const newUrl = prompt('Edit URL:', item.url);
+
+            if (newTitle !== null && newDescription !== null && newUrl !== null) {
+                item.title = newTitle;
+                item.description = newDescription;
+                item.url = newUrl;
+                saveContent();
+                
+                if (currentUser.role === 'admin') {
+                    loadAdminContent();
+                } else {
+                    loadOrgContent();
+                }
+                showAlert('Content updated successfully!', 'success');
+            }
+        }
+
+        // Delete content
+        function deleteContent(id, section) {
+            if (confirm('Are you sure you want to delete this content?')) {
+                contentData[section] = contentData[section].filter(item => item.id !== id);
+                saveContent();
+                loadAdminContent();
+                showAlert('Content deleted successfully!', 'success');
+            }
+        }
+
+        // Show alert
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            const container = document.querySelector('.container, .container-fluid');
+            if (container) {
+                container.insertBefore(alertDiv, container.firstChild);
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 5000);
+            }
+        }
+
+        // Initialize the app when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
