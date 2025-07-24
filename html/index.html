@@ -20,62 +20,6 @@
             --segal-text-dark: #2c3e50;
         }
 
-        /* Company123 Logo Overlay Styles */
-        .logo-overlay {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .logo-overlay img {
-            opacity: 1;
-        }
-
-        .logo-overlay::after {
-            content: "Company123";
-            position: absolute;
-            left: 38%; /* More precise positioning for just the text */
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.98);
-            padding: 1px 4px;
-            border-radius: 2px;
-            font-weight: 600;
-            font-size: 0.7em;
-            color: #2B4C77;
-            white-space: nowrap;
-            max-width: 55%; /* Limit width to prevent covering other text */
-            text-align: center;
-        }
-
-        /* Specific adjustments for different logo sizes */
-        .logo-overlay.size-4rem::after {
-            font-size: 0.9em;
-            left: 36%;
-            padding: 2px 5px;
-            max-width: 50%;
-        }
-
-        .logo-overlay.size-3-5rem::after {
-            font-size: 0.75em;
-            left: 38%;
-            padding: 1px 4px;
-            max-width: 55%;
-        }
-
-        .logo-overlay.size-5rem::after {
-            font-size: 1.1em;
-            left: 34%;
-            padding: 2px 6px;
-            max-width: 48%;
-        }
-
-        /* Dark background variant */
-        .logo-overlay.dark-bg::after {
-            background: rgba(255, 255, 255, 0.98);
-            color: #2B4C77;
-        }
-
         * {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -447,10 +391,8 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#" onclick="showView('home')">
-                <div class="logo-overlay size-4rem">
-                    <img src="thumbnail_image001.png" alt="Company123 Logo" style="height: 4rem; width: auto; margin-right: 12px;">
-                </div>
-                <span>RetireHub</span>
+                <img src="Seagull_logo.jpg" alt="Company123 Logo" style="height: 4rem; width: auto; margin-right: 12px;">
+                <span>Company123 RetireHub</span>
                 <span class="company-tag" id="companyTag"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -541,9 +483,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <h5 class="mb-3 d-flex align-items-center">
-                            <div class="logo-overlay size-3-5rem">
-                                <img src="thumbnail_image001.png" alt="Company123 Logo" style="height: 3.5rem; width: auto; margin-right: 12px;">
-                            </div>
+                            <img src="Seagull_logo.jpg" alt="Company123 Logo" style="height: 3.5rem; width: auto; margin-right: 12px;">
                             <span>Powered by Company123</span>
                         </h5>
                         <p class="mb-0 lead">Delivering trusted advice that improves lives since 1939. RetireHub brings our expertise directly to your organization's employees with personalized, accessible financial wellness tools.</p>
@@ -830,10 +770,8 @@
     <div id="adminView" class="view">
         <div class="container mt-4">
             <h2 class="section-title d-flex align-items-center">
-                <div class="logo-overlay size-5rem">
-                    <img src="thumbnail_image001.png" alt="Company123 Logo" style="height: 5rem; width: auto; margin-right: 16px;">
-                </div>
-                <span>Admin Panel</span>
+                <img src="Seagull_logo.jpg" alt="Company123 Logo" style="height: 5rem; width: auto; margin-right: 16px;">
+                <span>Company123 Admin Panel</span>
             </h2>
             
             <div class="admin-panel">
