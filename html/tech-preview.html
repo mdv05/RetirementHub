@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 RetireHub Tech Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0c1426 0%, #1a2332 50%, #0f1b2b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .header .description {
+            font-size: 1.125rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-item {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            color: #60a5fa;
+        }
+
+        .stats-section {
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            color: #f1f5f9;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        .demo-section {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: rgba(15, 23, 42, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .demo-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .demo-link {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #60a5fa;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+        }
+
+        .demo-link:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+            color: #60a5fa;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #60a5fa;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .demo-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🚀 RetireHub</h1>
+            <p class="subtitle">Next-Generation Financial Wellness Platform</p>
+            <p class="description">
+                Transforming retirement planning with modern web technologies, AI-powered insights, 
+                and enterprise-grade security. Built for scale, designed for simplicity.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="index.html" class="btn btn-primary">
+                    <span>🏦</span> Launch Platform
+                </a>
+                <a href="retirehub-architecture.html" class="btn btn-secondary">
+                    <span>🏗️</span> View Architecture
+                </a>
+            </div>
+        </header>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-title">AI-Powered Insights</div>
+                <div class="feature-description">
+                    Integrated RetireChat AI provides personalized financial guidance and retirement planning recommendations.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Natural Language Processing</span>
+                    <span class="tech-item">Machine Learning</span>
+                    <span class="tech-item">Conversational AI</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Real-time Collaboration</div>
+                <div class="feature-description">
+                    Live data synchronization enables seamless collaboration between administrators, organizations, and employees.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Firebase Firestore</span>
+                    <span class="tech-item">WebSocket</span>
+                    <span class="tech-item">Real-time Sync</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏗️</div>
+                <div class="feature-title">Modern Architecture</div>
+                <div class="feature-description">
+                    Built with React, Firebase, and cloud-native technologies for maximum scalability and performance.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">React 18</span>
+                    <span class="tech-item">Firebase</span>
+                    <span class="tech-item">TypeScript</span>
+                    <span class="tech-item">Material-UI</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">Enterprise Security</div>
+                <div class="feature-description">
+                    Role-based access control, multi-factor authentication, and GDPR compliance built from the ground up.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Firebase Auth</span>
+                    <span class="tech-item">SSO Integration</span>
+                    <span class="tech-item">RBAC</span>
+                    <span class="tech-item">Encryption</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Advanced Analytics</div>
+                <div class="feature-description">
+                    Comprehensive tracking of user engagement, content performance, and financial planning outcomes.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Firebase Analytics</span>
+                    <span class="tech-item">Custom Events</span>
+                    <span class="tech-item">Business Intelligence</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-title">Global Scale</div>
+                <div class="feature-description">
+                    Cloud-native infrastructure with global CDN distribution for optimal performance worldwide.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Google Cloud</span>
+                    <span class="tech-item">Global CDN</span>
+                    <span class="tech-item">Auto-scaling</span>
+                    <span class="tech-item">Edge Computing</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <h2 style="color: #f1f5f9; margin-bottom: 1rem;">Platform Capabilities</h2>
+            <p style="color: #94a3b8;">Designed to handle enterprise-scale financial wellness programs</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Concurrent Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime SLA</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">&lt;2s</div>
+                    <div class="stat-label">Page Load Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Global Availability</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Section -->
+        <div class="demo-section">
+            <h2 style="color: #f1f5f9; margin-bottom: 1rem;">🎯 Experience RetireHub</h2>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">
+                Explore different user perspectives and system capabilities
+            </p>
+            
+            <div class="demo-links">
+                <a href="index.html" class="demo-link">
+                    <span style="font-size: 1.5rem;">🏦</span>
+                    <span>Main Platform</span>
+                    <small style="color: #64748b;">Full Application</small>
+                </a>
+                <a href="retirehub-architecture.html" class="demo-link">
+                    <span style="font-size: 1.5rem;">🏗️</span>
+                    <span>Architecture</span>
+                    <small style="color: #64748b;">Technical Docs</small>
+                </a>
+                <a href="#" onclick="alert('Coming Soon: Interactive Architecture Diagram')" class="demo-link">
+                    <span style="font-size: 1.5rem;">🎨</span>
+                    <span>Interactive Demo</span>
+                    <small style="color: #64748b;">Coming Soon</small>
+                </a>
+                <a href="#" onclick="alert('Coming Soon: API Documentation')" class="demo-link">
+                    <span style="font-size: 1.5rem;">🔧</span>
+                    <span>API Docs</span>
+                    <small style="color: #64748b;">Coming Soon</small>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Platform</a>
+                <a href="retirehub-architecture.html" class="footer-link">Architecture</a>
+                <a href="#" class="footer-link">Documentation</a>
+                <a href="#" class="footer-link">API</a>
+                <a href="#" class="footer-link">Support</a>
+            </div>
+            <p>© 2025 Mariana Duong-Vazquez - RetireHub Platform - Enterprise Financial Wellness Solution</p>
+            <p style="color: #64748b; font-size: 0.875rem;">
+                Built with React • Firebase • TypeScript • Material-UI
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate feature cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = `${index * 0.1}s`;
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all feature cards
+            document.querySelectorAll('.feature-card').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Add hover effect to tech items
+            document.querySelectorAll('.tech-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                    this.style.backgroundColor = 'rgba(59, 130, 246, 0.2)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                });
+            });
+
+            // Add floating animation to header elements
+            const floatingElements = document.querySelectorAll('.header h1, .feature-icon');
+            floatingElements.forEach(element => {
+                element.style.animation += ', float 6s ease-in-out infinite';
+            });
+        });
+
+        // Add floating animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            .fade-in {
+                animation: fadeInUp 0.6s ease forwards;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 

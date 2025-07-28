@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏦 RetireHub Platform Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0c1426 0%, #1a2332 50%, #0f1b2b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: #60a5fa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-emoji {
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .card-content {
+            color: #cbd5e1;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        .status-current {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .status-planned {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-migration {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fde047;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3b82f6;
+            border: 3px solid #0c1426;
+        }
+
+        .timeline-phase {
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            color: #cbd5e1;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .tech-item {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: #60a5fa;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            color: #cbd5e1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🏦 RetireHub Platform</h1>
+            <p>Enterprise Financial Wellness Platform - Architecture & Migration Strategy</p>
+            
+            <nav class="nav-tabs">
+                <a href="tech-preview.html" class="nav-tab">🚀 Tech Preview</a>
+                <a href="#overview" class="nav-tab active">🌐 System Overview</a>
+                <a href="#current" class="nav-tab">📊 Current Architecture</a>
+                <a href="#migration" class="nav-tab">🚀 Migration Plan</a>
+                <a href="#future" class="nav-tab">⚡ Future State</a>
+                <a href="#timeline" class="nav-tab">📅 Timeline</a>
+                <a href="#metrics" class="nav-tab">📈 Success Metrics</a>
+            </nav>
+        </header>
+
+        <!-- System Overview -->
+        <section id="overview" class="section">
+            <h2 class="section-title">🌐 Complete RetireHub System Architecture</h2>
+            <p style="color: #94a3b8; margin-bottom: 2rem; text-align: center;">
+                End-to-end view of the RetireHub platform transformation from demo application to enterprise-ready financial wellness solution.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">👥</span>
+                        <span class="card-title">User Ecosystem</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>👨‍💼 Admin Users <span class="status-badge status-current">Current</span></li>
+                            <li>🏢 Organization Managers <span class="status-badge status-current">Current</span></li>
+                            <li>👤 Employee End Users <span class="status-badge status-current">Current</span></li>
+                            <li>🔐 Role-based Access Control <span class="status-badge status-planned">Enhanced</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">🤖</span>
+                        <span class="card-title">AI Integration</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>💬 RetireChat AI Assistant <span class="status-badge status-current">Active</span></li>
+                            <li>🧮 Financial Calculator <span class="status-badge status-current">Active</span></li>
+                            <li>📊 Personalized Insights <span class="status-badge status-planned">Planned</span></li>
+                            <li>🎯 Smart Recommendations <span class="status-badge status-planned">Planned</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">📚</span>
+                        <span class="card-title">Content Management</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>📖 Financial Learning Modules <span class="status-badge status-current">Active</span></li>
+                            <li>🔗 Credible Resource Links <span class="status-badge status-current">Active</span></li>
+                            <li>📰 Newsletter Management <span class="status-badge status-current">Active</span></li>
+                            <li>⚡ Real-time Collaboration <span class="status-badge status-planned">Planned</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Architecture -->
+        <section id="current" class="section">
+            <h2 class="section-title">📊 Current System Architecture</h2>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">🌐</span>
+                        <span class="card-title">Frontend Technology</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-stack">
+                            <span class="tech-item">HTML5</span>
+                            <span class="tech-item">Vanilla JavaScript</span>
+                            <span class="tech-item">Bootstrap 5</span>
+                            <span class="tech-item">CSS3</span>
+                        </div>
+                        <p>Static web application with responsive design and modern UI components.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">💾</span>
+                        <span class="card-title">Data Storage</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-stack">
+                            <span class="tech-item">localStorage</span>
+                            <span class="tech-item">JSON Structure</span>
+                            <span class="tech-item">Client-side Only</span>
+                        </div>
+                        <p>Browser-based storage for user preferences, content, and application state.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">🔐</span>
+                        <span class="card-title">Authentication</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-stack">
+                            <span class="tech-item">Demo Users</span>
+                            <span class="tech-item">Hardcoded Credentials</span>
+                            <span class="tech-item">Session Management</span>
+                        </div>
+                        <p>Demonstration authentication system with predefined user roles and access levels.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-emoji">⚠️</span>
+                    <span class="card-title">Current Limitations</span>
+                </div>
+                <div class="card-content">
+                    <ul class="feature-list">
+                        <li>❌ No persistent server-side storage</li>
+                        <li>❌ No real authentication system</li>
+                        <li>❌ Limited scalability options</li>
+                        <li>❌ No real-time data synchronization</li>
+                        <li>❌ No user registration/management</li>
+                        <li>❌ Single-user experience only</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Migration Plan -->
+        <section id="migration" class="section">
+            <h2 class="section-title">🚀 Firebase & React Migration Strategy</h2>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">🔥</span>
+                        <span class="card-title">Firebase Services</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-stack">
+                            <span class="tech-item">Firebase Auth</span>
+                            <span class="tech-item">Firestore Database</span>
+                            <span class="tech-item">Firebase Storage</span>
+                            <span class="tech-item">Firebase Hosting</span>
+                            <span class="tech-item">Cloud Functions</span>
+                        </div>
+                        <p>Complete Firebase ecosystem for authentication, database, storage, and hosting.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">⚛️</span>
+                        <span class="card-title">React Frontend</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-stack">
+                            <span class="tech-item">React 18</span>
+                            <span class="tech-item">Material-UI</span>
+                            <span class="tech-item">Context API</span>
+                            <span class="tech-item">Custom Hooks</span>
+                            <span class="tech-item">TypeScript</span>
+                        </div>
+                        <p>Modern React application with TypeScript, component libraries, and state management.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">🔄</span>
+                        <span class="card-title">CI/CD Pipeline</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-stack">
+                            <span class="tech-item">GitHub Actions</span>
+                            <span class="tech-item">Automated Testing</span>
+                            <span class="tech-item">Firebase Deploy</span>
+                            <span class="tech-item">Code Quality</span>
+                        </div>
+                        <p>Automated deployment pipeline with testing, quality checks, and staging environments.</p>
+                    </div>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Current State</th>
+                        <th>Future State</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Authentication</td>
+                        <td>Demo/Hardcoded</td>
+                        <td>Firebase Auth + SSO</td>
+                        <td>🔐 Enterprise Security</td>
+                    </tr>
+                    <tr>
+                        <td>Data Storage</td>
+                        <td>localStorage</td>
+                        <td>Firestore Database</td>
+                        <td>☁️ Cloud Persistence</td>
+                    </tr>
+                    <tr>
+                        <td>Real-time Updates</td>
+                        <td>Manual Refresh</td>
+                        <td>Live Synchronization</td>
+                        <td>⚡ Instant Updates</td>
+                    </tr>
+                    <tr>
+                        <td>Scalability</td>
+                        <td>Single User</td>
+                        <td>Unlimited Users</td>
+                        <td>📈 Enterprise Scale</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Support</td>
+                        <td>Responsive Web</td>
+                        <td>PWA + Native Feel</td>
+                        <td>📱 Mobile-first</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Future State -->
+        <section id="future" class="section">
+            <h2 class="section-title">⚡ Future Platform Capabilities</h2>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">99.9%</div>
+                    <div class="metric-label">Uptime SLA</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">&lt;2s</div>
+                    <div class="metric-label">Page Load Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">10,000+</div>
+                    <div class="metric-label">Concurrent Users</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">24/7</div>
+                    <div class="metric-label">Global Availability</div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">🛡️</span>
+                        <span class="card-title">Enterprise Security</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>🔐 Multi-factor Authentication</li>
+                            <li>🏢 Single Sign-On (SSO) Integration</li>
+                            <li>📋 GDPR & SOC 2 Compliance</li>
+                            <li>🔒 End-to-end Encryption</li>
+                            <li>📊 Audit Logging</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">⚡</span>
+                        <span class="card-title">Performance Features</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>🌍 Global CDN Distribution</li>
+                            <li>💨 Advanced Caching Strategies</li>
+                            <li>📱 Progressive Web App (PWA)</li>
+                            <li>🔄 Offline-first Architecture</li>
+                            <li>⚡ Real-time Synchronization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">📊</span>
+                        <span class="card-title">Analytics & Insights</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>📈 Real-time Usage Analytics</li>
+                            <li>👤 User Behavior Tracking</li>
+                            <li>🎯 Content Performance Metrics</li>
+                            <li>💡 AI-powered Insights</li>
+                            <li>📋 Custom Reporting Dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline" class="section">
+            <h2 class="section-title">📅 Implementation Timeline</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 1: Foundation (Weeks 1-2)</div>
+                    <div class="timeline-content">
+                        Firebase project setup, configuration, and initial service integration. Establish development environment and CI/CD pipeline foundation.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 2: Authentication (Weeks 2-3)</div>
+                    <div class="timeline-content">
+                        Migrate from demo authentication to Firebase Auth. Implement role-based access control and user management systems.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 3: Database Migration (Weeks 3-4)</div>
+                    <div class="timeline-content">
+                        Transform localStorage data to Firestore collections. Implement data migration tools and validation processes.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 4: React Development (Weeks 4-6)</div>
+                    <div class="timeline-content">
+                        Build React application with modern component architecture. Implement state management and responsive design patterns.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 5: Enhanced Features (Weeks 6-8)</div>
+                    <div class="timeline-content">
+                        Add real-time updates, PWA capabilities, and advanced UI components. Integrate analytics and monitoring systems.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 6: Testing & Launch (Weeks 8-10)</div>
+                    <div class="timeline-content">
+                        Comprehensive testing, performance optimization, and production deployment. User training and documentation completion.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Metrics -->
+        <section id="metrics" class="section">
+            <h2 class="section-title">📈 Success Metrics & ROI</h2>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">⚡</span>
+                        <span class="card-title">Technical KPIs</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>Page Load Time: &lt; 2 seconds</li>
+                            <li>System Uptime: 99.9%</li>
+                            <li>Mobile Responsiveness: &gt; 95 score</li>
+                            <li>Security Audit: &gt; 90 score</li>
+                            <li>Core Web Vitals: All metrics passing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-emoji">💰</span>
+                        <span class="card-title">Cost Benefits</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>Firebase: Pay-as-you-scale pricing</li>
+                            <li>Maintenance: -70% reduction</li>
+                            <li>Development: +50% velocity</li>
+                            <li>Infrastructure: Serverless efficiency</li>
+                            <li>Security: Enterprise-grade included</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div style="margin-bottom: 2rem;">
+                <a href="index.html" style="color: #60a5fa; text-decoration: none; margin-right: 2rem;">🏦 Main Platform</a>
+                <a href="tech-preview.html" style="color: #60a5fa; text-decoration: none;">🚀 Tech Preview</a>
+            </div>
+            <p>© 2025 Mariana Duong-Vazquez - RetireHub Platform - Enterprise Financial Wellness Solution</p>
+            <p>Transforming retirement planning through modern technology and AI-powered insights</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = tab.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Update active tab
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Smooth scroll to section
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.card, .section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Update active nav tab on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+
+                if (scrollPos >= top && scrollPos < top + height) {
+                    document.querySelectorAll('.nav-tab').forEach(tab => {
+                        tab.classList.remove('active');
+                        if (tab.getAttribute('href') === `#${id}`) {
+                            tab.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
