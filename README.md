@@ -13,3 +13,8 @@ RetireHub was my team's winning intern project at Segal (summer 2025). The compa
 
 ## Tech
 Static HTML, JavaScript and Bootstrap 5, hosted on Firebase. This is a proof of concept: logins are demo accounts and content is saved in the browser's local storage, not a database.
+
+## Deploy
+```bash
+firebase deploy --only hosting
+```
